@@ -73,62 +73,129 @@ const todos = [
 // Le composant est rendu et sait comment s'intégrer dans le DOM 
 // Quand on fait setCount il change l'état du composant et rend à nouveau le composant. React met à jour le DOM et rend les modifs
 
-function App() {
+// function App() {
 
-  // const [count, setCount] = useState(0)
-
-
-  // console.log('render')
-
-  // const increment = () => {
-  //   setCount(count + 1)
-  // }
-
-  // On incrémente la valeur de l'état et on récupère (permet de faire un + 3 ici par exemple. + fonction indépendante de la valeur de count)
-  // const increment = () => {
-  //   setCount((count) => count + 1)
-  //   setCount((count) => count + 1)
-  //   setCount((count) => count + 1)
-  // } 
-
-  //   return <>
-    //   <p>Compteur : {count}</p>
-    //   <button onClick={increment}>Incrémenter</button>
-  //    </>
-
-  // On peut aussi stocker des infos sur individus
-  const [person, setPerson] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    age: 18,
-  })
-  const [count, setCount] = useState(0)
-
-  // Quand on appelle un setter il faut systématiquement lui passer une nouvelle version de l'objet. ON ne peut pas faire de mutation sur objet ou tableau dans REACT
-
-  // On peut appeler plusieurs hook mais attention SYSTEMATIQUEMENT DANS LE MEME ORDRE -> Donc ça ne marche pas dans les boucles ou conditions
-  const incrementAge= () => {
-    setPerson({...person, age: person.age + 1}) // on fait un nouvel objet avec la clé âge modifiée
-  }
-
-  const incrementCount= () => {
-    setCount(count + 1)
-  }
-
-      return <>
-        <p>Age de {person.firstName} : {person.age} </p>
-        <button onClick={incrementAge}>Gagner une année</button>
-        <button onClick={incrementCount}>Incrémenter {count} </button>
-     </>
+//   // const [count, setCount] = useState(0)
 
 
+//   // console.log('render')
 
-}
+//   // const increment = () => {
+//   //   setCount(count + 1)
+//   // }
+
+//   // On incrémente la valeur de l'état et on récupère (permet de faire un + 3 ici par exemple. + fonction indépendante de la valeur de count)
+//   // const increment = () => {
+//   //   setCount((count) => count + 1)
+//   //   setCount((count) => count + 1)
+//   //   setCount((count) => count + 1)
+//   // } 
+
+//   //   return <>
+//     //   <p>Compteur : {count}</p>
+//     //   <button onClick={increment}>Incrémenter</button>
+//   //    </>
+
+//   // On peut aussi stocker des infos sur individus
+//   const [person, setPerson] = useState({
+//     firstName: 'John',
+//     lastName: 'Doe',
+//     age: 18,
+//   })
+//   const [count, setCount] = useState(0)
+
+//   // Quand on appelle un setter il faut systématiquement lui passer une nouvelle version de l'objet. ON ne peut pas faire de mutation sur objet ou tableau dans REACT
+
+//   // On peut appeler plusieurs hook mais attention SYSTEMATIQUEMENT DANS LE MEME ORDRE -> Donc ça ne marche pas dans les boucles ou conditions
+//   const incrementAge= () => {
+//     setPerson({...person, age: person.age + 1}) // on fait un nouvel objet avec la clé âge modifiée
+//   }
+
+//   const incrementCount= () => {
+//     setCount(count + 1)
+//   }
+
+//       return <>
+//         <p>Age de {person.firstName} : {person.age} </p>
+//         <button onClick={incrementAge}>Gagner une année</button>
+//         <button onClick={incrementCount}>Incrémenter {count} </button>
+//      </>
+
+
+
+// }
 
 // Résumé : useState on l'utilise dans une function comme un composant React 
 // Il prend en paramètre un objet ou une valeur lié au composants et il retournera un tableau de taille 2 avec en 1 la valeur et en 2 un setter pour changer la valeur
 // A chaque fois que le setter est appelé le composant est rerendu et notre structure HTML est rerendu
 // On peut utiliser l'interpollation pour afficher les valeurs que l'on a dans les variables et on pourra utiliser eventListener pour venir changer (grâce aux setter) l'état de notre composant
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+// LES FORMULAIRES
+
+function App() {
+
+  // const [firstName, setFirstName] = useState('John Doe')
+  
+  // const handleChange = (e) => {
+  //   setFirstName(e.target.value)
+  // }
+
+  // const reset = () => {
+  //   setFirstName('')
+  // }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   console.log(new FormData(e.target))
+  // }
+
+// Grâce à onChange = React contrôle le champ 
+// 
+  // return <form>
+  //   <input type="text" name="firstName" value={firstName} onChange={handleChange}/>
+  //   {firstName}
+  //   <button onClick={reset} type="button" >Reset</button>
+  // </form>
+
+  // Ici on a pas de rendu à chaque frappe car React ne gère pas le formulaire
+  // return <form onSubmit={handleSubmit}>
+  //   <input type="text" name="firstName"/>
+  //   <button>Envoyer</button>
+  // </form>
+
+  // Pour mettre une valeur par défaut -> defaultValue=""
+
+  // Que choisir ? -> Dépend de la situation. Si on a un champ libre et qu'on veut juste récupérer la saisie après. 
+  // Par contre si on veut rendre en live la saisie du user -> le gérer via React c'est bien mais il faut bien penser à value + onChange
+
+  // Pour textarea 
+  // <textarea value={value} onChange={handleChange}></textarea>
+
+  // pour checked
+
+  const [value, setValue] = useState('')
+
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
+
+  const [checked, setChecked] = useState(true)
+
+  const toggleCheck = () => {
+    setChecked(!checked)
+  }
+
+  return <form>
+    <textarea value={value} onChange={handleChange}></textarea>
+    <input type="checkbox" cheched= {checked} onChange={toggleCheck} />
+    <button disabled={!checked} >Envoyer</button>
+  </form>
+}
+
+// Si contrôlé -> value + onChange obligatoire
+// Si on veut une value il faut jamais undefined car passage de contrôlé à incontrôlé
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 export default App
