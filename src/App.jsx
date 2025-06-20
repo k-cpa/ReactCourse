@@ -133,7 +133,7 @@ const todos = [
 
 // LES FORMULAIRES
 
-function App() {
+// function App() {
 
   // const [firstName, setFirstName] = useState('John Doe')
   
@@ -174,28 +174,34 @@ function App() {
 
   // pour checked
 
-  const [value, setValue] = useState('')
+//   const [value, setValue] = useState('')
 
-  const handleChange = (e) => {
-    setValue(e.target.value)
-  }
+//   const handleChange = (e) => {
+//     setValue(e.target.value)
+//   }
 
-  const [checked, setChecked] = useState(true)
+//   const [checked, setChecked] = useState(true)
 
-  const toggleCheck = () => {
-    setChecked(!checked)
-  }
+//   const toggleCheck = () => {
+//     setChecked(!checked)
+//   }
 
-  return <form>
-    <textarea value={value} onChange={handleChange}></textarea>
-    <input type="checkbox" cheched= {checked} onChange={toggleCheck} />
-    <button disabled={!checked} >Envoyer</button>
-  </form>
-}
+//   return <form>
+//     <textarea value={value} onChange={handleChange}></textarea>
+//     <input type="checkbox" cheched= {checked} onChange={toggleCheck} />
+//     <button disabled={!checked} >Envoyer</button>
+//   </form>
+// }
 
 // Si contrôlé -> value + onChange obligatoire
 // Si on veut une value il faut jamais undefined car passage de contrôlé à incontrôlé
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+// Le flux de données dans React
+
+function App() {
+  
+}
 
 export default App
