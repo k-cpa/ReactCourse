@@ -10,7 +10,7 @@ export function Input({placeholder, value, onChange}) {
         <input type="text" 
         className="form-control"
         value={value}
-        placeholder="{placeholder}" 
+        placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
         />
     </div>
