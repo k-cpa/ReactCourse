@@ -201,21 +201,56 @@ const todos = [
 // Le flux de données dans React
 // quand on creer un composant toujours pareil on a propriete qui permettent aux parents sde desc l'info et event listener qui font remonter les infos. possible sur plsr composants. 
 
+// function App() {
+//   const [isTermAccepted, setIsTermAccepted] = useState(false)
+
+//   return <form>
+//     <CGUCheckbox checked = {isTermAccepted} onCheck={setIsTermAccepted}/>
+//     <button disabled={!isTermAccepted}>Envoyer le formulaire</button>
+//   </form>
+
+//   function CGUCheckbox ({checked, onCheck}) {
+//     return <div>
+//       <label> 
+//         <input type='checkbox' checked={checked} onChange={(e) => onCheck(e.target.checked)}/> Accepter les conditions d'utilisation
+//         </label>
+//     </div>
+//   }
+// }
+
+// export default App
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+// Creation d'une liste de produits
+import {Checkbox} from "./componants/forms/Checkbox.jsx";
+
+const PRODUCTS = [
+  {category: 'Fruits', price: "$1", stocked: true, name: "Apple"},
+  {category: 'Fruits', price: "$1", stocked: true, name: "Dragonfruit"},
+  {category: 'Fruits', price: "$2", stocked: true, name: "Passionfruit"},
+  {category: 'Vegetables', price: "$2", stocked: true, name: "Spinach"},
+  {category: 'Vegetables', price: "$4", stocked: false, name: "Pumpkin"},
+  {category: 'Vegetables', price: "$1", stocked: true, name: "Peas"},
+]
+
 function App() {
-  const [isTermAccepted, setIsTermAccepted] = useState(false)
 
-  return <form>
-    <CGUCheckbox checked = {isTermAccepted} onCheck={setIsTermAccepted}/>
-    <button disabled={!isTermAccepted}>Envoyer le formulaire</button>
-  </form>
-
-  function CGUCheckbox ({checked, onCheck}) {
-    return <div>
-      <label> 
-        <input type='checkbox' checked={checked} onChange={(e) => onCheck(e.target.checked)}/> Accepter les conditions d'utilisation
-        </label>
-    </div>
-  }
 }
 
-export default App
+function SearchBar() {
+  return <div>
+    <div className="mb-3">
+      <Input value= "" 
+      onChange={() => null}
+      placeholder="rechercher..."
+      />
+
+      <Checkbox 
+      checked={false}
+      onChange={() => null} 
+      label="N'afficher que les produits en stock"
+      />
+    </div>
+  </div>
+}
