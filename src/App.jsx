@@ -199,9 +199,23 @@ const todos = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 // Le flux de données dans React
+// quand on creer un composant toujours pareil on a propriete qui permettent aux parents sde desc l'info et event listener qui font remonter les infos. possible sur plsr composants. 
 
 function App() {
-  
+  const [isTermAccepted, setIsTermAccepted] = useState(false)
+
+  return <form>
+    <CGUCheckbox checked = {isTermAccepted} onCheck={setIsTermAccepted}/>
+    <button disabled={!isTermAccepted}>Envoyer le formulaire</button>
+  </form>
+
+  function CGUCheckbox ({checked, onCheck}) {
+    return <div>
+      <label> 
+        <input type='checkbox' checked={checked} onChange={(e) => onCheck(e.target.checked)}/> Accepter les conditions d'utilisation
+        </label>
+    </div>
+  }
 }
 
 export default App
