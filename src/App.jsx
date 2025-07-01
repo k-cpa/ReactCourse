@@ -225,6 +225,7 @@ const todos = [
 // Creation d'une liste de produits
 import {Input} from "./components/forms/Input.jsx";
 import {Checkbox} from "./components/forms/Checkbox.jsx";
+import {Range} from "./components/forms/Range.jsx";
 import {ProductCategoryRow} from "./components/products/ProductCategoryRow.jsx";
 import { ProductRow } from "./components/products/ProductRow.jsx"
 
@@ -241,13 +242,22 @@ function App() {
   
   const [showStockedOnly, setShowStockedOnly] = useState(false)
   const [search, setSearch] = useState('')
+  const [showPrice, setShowPrice] = useState(2)
   const visibleProducts = PRODUCTS.filter(product => {
+      console.log('prix produit:', product.price, 'prix filtre:', showPrice);
+
     if (showStockedOnly && !product.stocked) {
       return false
     }
     if (search && !product.name.toLowerCase().includes(search.toLowerCase())) {
       return false
     }
+    const priceNumber = Number(product.price.replace(/\$/g, ''));
+
+    if (showPrice < priceNumber) {
+      return false
+    }
+
     return true
   })
 
@@ -258,9 +268,14 @@ function App() {
       showStockedOnly={showStockedOnly} 
       onStockedOnlyChange={setShowStockedOnly}
     />
+    <PriceBar
+      price = {showPrice}
+      onPriceChange = {setShowPrice}
+    />
     <ProductTable 
       products = {visibleProducts}
     />
+
   </div>
 }
 
@@ -283,7 +298,18 @@ function SearchBar({showStockedOnly, onStockedOnlyChange, search, onSearchChange
   </div>
 }
 
-function ProductTable ({products, showStockedOnly}) {
+function PriceBar({price, onPriceChange}) {
+  return <div className="mb-3">
+    <Range
+      value = {price}
+      onChange = {onPriceChange}
+      label = {'Prix :' + ' ' + price + '$'}
+    />
+  </div>
+}
+
+
+function ProductTable ({products}) {
 
   const rows = []
     let lastCategory = null
